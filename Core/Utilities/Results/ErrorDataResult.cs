@@ -9,7 +9,7 @@ namespace Core.Utilities.Results
 		public ErrorDataResult(T data, string message) : base(data, false, message) { }
 		public ErrorDataResult(T data) : base(data, false) { }
 
-		//aşağıdakileri proje boyunca kullanmayacağım ama kullanım şekli olara data'nın
+		//aşağıdakileri proje boyunca kullanmayacağım ama kullanım şekli olarak data'nın
 		//gelmediği durumlarda default yapısı bu şekilde kullanılıyor.
 		//sırasıyla sadece durum ve sadece message gectıgım metotlar
 		public ErrorDataResult() : base(default, false) { }
