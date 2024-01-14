@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using Core.Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
