@@ -17,7 +17,7 @@ namespace Core.Utilities.Security.Jwt
 		public IConfiguration Configuration { get; }
 		private TokenOptions _tokenOptions;
 		private DateTime _accessTokenExpiration;
-		public JwtHelper(IConfiguration configuration, TokenOptions tokenOptions, DateTime accessTokenExpiration)
+		public JwtHelper(IConfiguration configuration)
 		{
 			Configuration = configuration;
 			_tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();

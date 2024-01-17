@@ -1,7 +1,6 @@
 ﻿using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework.Contexts;
-using Entities.Concrete;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -18,8 +17,8 @@ namespace DataAccess.Concrete.EntityFramework
 			{
 				var result = from operationClaim in context.OperationClaims
 							 join userOperationClaim in context.UserOperationClaims
-							 on operationClaim.Id equals userOperationClaim.Id
-							 where userOperationClaim.Id == user.Id
+							 on operationClaim.Id equals userOperationClaim.OperationClaimId
+							 where userOperationClaim.UserId == user.Id
 							 select new OperationClaim
 							 {
 								 Id = operationClaim.Id,

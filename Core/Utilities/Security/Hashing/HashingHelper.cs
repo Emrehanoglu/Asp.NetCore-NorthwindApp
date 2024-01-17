@@ -20,7 +20,7 @@ namespace Core.Utilities.Security.Hashing
 		//hashler aynı algoritmayı yanı HMACSHA512 'yi kullandığı için karsılastırma yapmak mümkün
 		public static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
 		{
-			using (var hmac = new System.Security.Cryptography.HMACSHA512())
+			using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
 			{
 				var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 				for(int i = 0; i < computedHash.Length; i++)

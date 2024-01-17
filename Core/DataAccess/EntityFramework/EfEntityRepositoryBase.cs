@@ -16,10 +16,10 @@ namespace Core.DataAccess.EntityFramework
 		{
 			using (var context= new TContext())
 			{
-				context.Entry(entity).State = EntityState.Added;
-				context.SaveChanges();
-				//context.Set<TEntity>().Add(entity);
+				//var addedEntity = context.Entry(entity).State;
 				//context.SaveChanges();
+				context.Set<TEntity>().Add(entity);
+				context.SaveChanges();
 			}
 		}
 
