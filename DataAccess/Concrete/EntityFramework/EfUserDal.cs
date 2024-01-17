@@ -15,9 +15,9 @@ namespace DataAccess.Concrete.EntityFramework
 		{
 			using (var context = new NorthwindContext())
 			{
-				var result = from operationClaim in context.OperationClaims
-							 join userOperationClaim in context.UserOperationClaims
-							 on operationClaim.Id equals userOperationClaim.OperationClaimId
+				var result = from userOperationClaim in context.UserOperationClaims
+							 join operationClaim in context.OperationClaims
+							 on userOperationClaim.OperationClaimId equals operationClaim.Id
 							 where userOperationClaim.UserId == user.Id
 							 select new OperationClaim
 							 {
