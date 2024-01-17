@@ -68,9 +68,10 @@ namespace WebAPI
 
 			app.UseRouting();
 
-			app.UseAuthorization();
 			//jwt için Authentication konfigurasyonunu ekledim.
 			app.UseAuthentication();
+
+			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 			{
