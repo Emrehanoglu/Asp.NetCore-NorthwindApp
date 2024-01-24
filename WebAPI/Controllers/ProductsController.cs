@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Extensions;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +25,7 @@ namespace WebAPI.Controllers
 		//[Authorize(Roles = "Product.List")] 
 		public IActionResult GetList()
 		{
+			User.ClaimRoles();
 			var result = _productService.GetList();
 			if (result.Success)
 			{
