@@ -1,4 +1,6 @@
-﻿using Core.Utilities.IoC;
+﻿using Core.CrossCuttingConcerns.Caching;
+using Core.CrossCuttingConcerns.Caching.Microsoft;
+using Core.Utilities.IoC;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ namespace Core.DependencyResolver
 		public void Load(IServiceCollection collection)
 		{
 			collection.AddMemoryCache();
+			collection.AddSingleton<ICacheManager, MemoryCacheManager>();
 		}
 	}
 }
