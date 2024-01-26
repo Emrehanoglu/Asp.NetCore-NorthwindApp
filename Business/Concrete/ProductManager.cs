@@ -58,9 +58,9 @@ namespace Business.Concrete
 			Thread.Sleep(5000);
 			return new SuccessDataResult<List<Product>>(_productDal.GetList().ToList());
 		}
-		[SecuredOperation("Product.List,Admin")] //Product.List veya Admin rolüne sahip olan kullanıcılar
-		[CacheAspect(1)] //1 dakika 
+		//[SecuredOperation("Product.List,Admin")] //Product.List veya Admin rolüne sahip olan kullanıcılar
 		[LogAspect(typeof(FileLogger))]
+		[CacheAspect(1)] //1 dakika 
 		public IDataResult<List<Product>> GetListByCategory(int categoryId)
 		{
 			return new SuccessDataResult<List<Product>>(_productDal.GetList(x => x.CategoryId == categoryId).ToList());
