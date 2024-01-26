@@ -30,11 +30,16 @@ namespace Core.Aspects.Autofac.Logging
 		}
 		private LogDetail GetLogDetail(IInvocation ınvocation)
 		{
-			var logParameters = ınvocation.Arguments.Select(x => new LogParameter
+			var logParameters = new List<LogParameter>();
+			for (int i = 0; i < ınvocation.Arguments.Length; i++)
 			{
-				Value = x,
-				Type = x.GetType().Name
-			}).ToList();
+				logParameters.Add(new LogParameter
+				{
+					Name = ınvocation.GetConcreteMethod().GetParameters()[i].Name,
+					Value = ınvocation.Arguments[i],
+					Type = ınvocation.Arguments[i].GetType().Name
+				});
+			}
 
 			var logDetail = new LogDetail 
 			{
