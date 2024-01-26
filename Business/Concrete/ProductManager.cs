@@ -3,6 +3,7 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Caching;
@@ -17,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Business.Concrete
 {
@@ -48,9 +50,10 @@ namespace Business.Concrete
 		{
 			return new SuccessDataResult<Product>(_productDal.Get(x=>x.ProductId==productId));
 		}
-
+		[PerformanceAspect(5)]
 		public IDataResult<List<Product>> GetList()
 		{
+			Thread.Sleep(5000);
 			return new SuccessDataResult<List<Product>>(_productDal.GetList().ToList());
 		}
 		[SecuredOperation("Product.List,Admin")] //Product.List veya Admin rolüne sahip olan kullanıcılar
