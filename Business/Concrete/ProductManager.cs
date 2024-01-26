@@ -3,10 +3,12 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logging;
 using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Caching;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Extensions;
 using Core.Utilities.Results;
@@ -58,6 +60,7 @@ namespace Business.Concrete
 		}
 		[SecuredOperation("Product.List,Admin")] //Product.List veya Admin rolüne sahip olan kullanıcılar
 		[CacheAspect(1)] //1 dakika 
+		[LogAspect(typeof(FileLogger))]
 		public IDataResult<List<Product>> GetListByCategory(int categoryId)
 		{
 			return new SuccessDataResult<List<Product>>(_productDal.GetList(x => x.CategoryId == categoryId).ToList());
