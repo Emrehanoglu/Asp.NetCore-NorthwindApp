@@ -11,6 +11,7 @@ using Core.CrossCuttingConcerns.Caching;
 using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Extensions;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -37,7 +38,7 @@ namespace Business.Concrete
 		public IResult Add(Product product)
 		{
 
-			IResult result =  CheckIfProductNameExist(product.ProductName);
+			IResult result = BusinessRules.Run(CheckIfProductNameExist(product.ProductName));
 			if (result != null)
 			{
 				return result;
@@ -56,7 +57,7 @@ namespace Business.Concrete
 				return new ErrorResult(Messages.ProductNameAlreadyExist);
 			}
 
-			return null;
+			return new SuccessResult();
 		}
 
 		public IResult Delete(Product product)
