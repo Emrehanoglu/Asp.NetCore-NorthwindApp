@@ -33,7 +33,25 @@ namespace Core.Aspects.Autofac.Exception
 
 		private LogDetailWithException GetLogDetail(IInvocation ınvocation)
 		{
-			throw new NotImplementedException();
+			var logParameters = new List<LogParameter>();
+			
+			for(int i = 0; i < ınvocation.Arguments.Length; i++)
+			{
+				logParameters.Add(new LogParameter
+				{
+					Name=ınvocation.GetConcreteMethod().GetParameters()[i].Name,
+					Value=ınvocation.Arguments[i],
+					Type=ınvocation.Arguments[i].GetType().Name
+				});
+			}
+
+			var logDetailWithException = new LogDetailWithException
+			{
+				MethodName = ınvocation.Method.Name,
+				LogParameters = logParameters
+			};
+
+			return logDetailWithException;
 		}
 	}
 }
