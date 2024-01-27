@@ -69,6 +69,8 @@ namespace WebAPI
 				app.UseDeveloperExceptionPage();
 			}
 
+			app.ConfigureCustomExceptionMiddleware();
+
 			//3000 portundan gelecek olan her türlü talebe izin ver demiþ oluyorum.
 			app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader());
 
