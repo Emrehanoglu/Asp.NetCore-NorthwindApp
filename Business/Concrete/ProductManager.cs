@@ -36,10 +36,27 @@ namespace Business.Concrete
 		[CacheRemoveAspect("IProductService.Get")]
 		public IResult Add(Product product)
 		{
+
+			IResult result =  CheckIfProductNameExist(product.ProductName);
+			if (result != null)
+			{
+				return result;
+			}
+
 			//ValidationTool.Validate(new ProductValidator(), product);
 
 			_productDal.Add(product);
 			return new SuccessResult(Messages.ProductAdded);
+		}
+
+		private IResult CheckIfProductNameExist(string productName)
+		{
+			if (_productDal.Get(p => p.ProductName == productName) != null)
+			{
+				return new ErrorResult(Messages.ProductNameAlreadyExist);
+			}
+
+			return null;
 		}
 
 		public IResult Delete(Product product)
