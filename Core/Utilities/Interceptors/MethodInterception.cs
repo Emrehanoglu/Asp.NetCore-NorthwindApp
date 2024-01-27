@@ -10,7 +10,7 @@ namespace Core.Utilities.Interceptors
 	{
 		protected virtual void OnBefore(IInvocation ınvocation) { } //metot çalışmadan once calısacak yer
 		protected virtual void OnAfter(IInvocation ınvocation) { } //metot calıstıktan sonra calısacak yer
-		protected virtual void OnException(IInvocation ınvocation) { } //metot hata verirse calısacak yer
+		protected virtual void OnException(IInvocation ınvocation, System.Exception e) { } //metot hata verirse calısacak yer
 		protected virtual void OnSuccess(IInvocation ınvocation) { } //metot başarılı calısırsa calısacak yer
 		
 		public override void Intercept(IInvocation invocation)
@@ -21,10 +21,10 @@ namespace Core.Utilities.Interceptors
 			{
 				invocation.Proceed();
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
 				isSuccess = false;
-				OnException(invocation);
+				OnException(invocation,e);
 				throw;
 			}
 			finally

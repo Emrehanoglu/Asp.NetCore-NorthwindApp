@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using Core.CrossCuttingConcerns.Logging;
 using Core.CrossCuttingConcerns.Logging.Log4Net;
 using Core.Messages;
 using Core.Utilities.Interceptors;
@@ -23,9 +24,16 @@ namespace Core.Aspects.Autofac.Exception
 			_loggerServiceBase = (LoggerServiceBase)Activator.CreateInstance(loggerService);
 		}
 
-		protected override void OnException(IInvocation ınvocation)
+		protected override void OnException(IInvocation ınvocation, System.Exception e)
 		{
-			base.OnException(ınvocation);
+			LogDetailWithException logDetailWithException = GetLogDetail(ınvocation);
+			logDetailWithException.ExceptionMessage = e.Message;
+			_loggerServiceBase.Error(logDetailWithException);
+		}
+
+		private LogDetailWithException GetLogDetail(IInvocation ınvocation)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }
